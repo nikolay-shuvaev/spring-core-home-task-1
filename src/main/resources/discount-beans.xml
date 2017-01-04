@@ -1,0 +1,26 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+
+    <bean id="discountService" class="services.impl.DiscountServiceImpl">
+        <property name="strategies">
+            <list>
+                <ref bean="birthdayStrategy"/>
+                <ref bean="tenthSoldTicketStrategy"/>
+            </list>
+        </property>
+    </bean>
+
+
+    <bean id="birthdayStrategy" class="services.strategies.BirthdayDiscountStrategy">
+        <constructor-arg value="5"/>
+        <constructor-arg value="5"/>
+    </bean>
+
+    <bean id="tenthSoldTicketStrategy" class="services.strategies.SoldTicketDiscountStrategy">
+        <constructor-arg value="50"/>
+        <constructor-arg value="10"/>
+    </bean>
+</beans>

@@ -1,0 +1,17 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+
+    <bean id="bookingService" class="services.impl.BookingServiceImpl"/>
+
+    <bean id="userService" class="services.impl.UserServiceImpl"/>
+
+    <bean id="eventService" class="services.impl.EventServiceImpl"/>
+
+    <bean id="auditoriumService" class="services.impl.AuditoriumServiceImpl"/>
+
+    <import resource="discount-beans.xml"/>
+    <import resource="dao-beans.xml"/>
+</beans>
