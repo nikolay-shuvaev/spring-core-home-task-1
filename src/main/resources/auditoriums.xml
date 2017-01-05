@@ -7,39 +7,39 @@
 
     <util:list id="auditoriumsList">
         <bean class="entities.Auditorium">
-            <property name="name" value="${center.auditorium.1.name}"/>
-            <property name="numberOfSeats" value="${center.auditorium.1.numberOfSeats}"/>
-            <property name="vipSeats" value="${center.auditorium.1.vipSeats}"/>
+            <constructor-arg name="name" value="${center.auditorium.1.name}"/>
+            <constructor-arg name="numberOfSeats" value="${center.auditorium.1.numberOfSeats}"/>
+            <constructor-arg name="vipSeats" value="${center.auditorium.1.vipSeats}"/>
         </bean>
         <bean class="entities.Auditorium">
-            <property name="name" value="${center.auditorium.2.name}"/>
-            <property name="numberOfSeats" value="${center.auditorium.2.numberOfSeats}"/>
-            <property name="vipSeats" value="${center.auditorium.2.vipSeats}"/>
+            <constructor-arg name="name" value="${center.auditorium.2.name}"/>
+            <constructor-arg name="numberOfSeats" value="${center.auditorium.2.numberOfSeats}"/>
+            <constructor-arg name="vipSeats" value="${center.auditorium.2.vipSeats}"/>
         </bean>
         <bean class="entities.Auditorium">
-            <property name="name" value="${center.auditorium.3.name}"/>
-            <property name="numberOfSeats" value="${center.auditorium.3.numberOfSeats}"/>
-            <property name="vipSeats" value="${center.auditorium.3.vipSeats}"/>
+            <constructor-arg name="name" value="${center.auditorium.3.name}"/>
+            <constructor-arg name="numberOfSeats" value="${center.auditorium.3.numberOfSeats}"/>
+            <constructor-arg name="vipSeats" value="${center.auditorium.3.vipSeats}"/>
         </bean>
         <bean class="entities.Auditorium">
-            <property name="name" value="${center.auditorium.4.name}"/>
-            <property name="numberOfSeats" value="${center.auditorium.4.numberOfSeats}"/>
-            <property name="vipSeats" value="${center.auditorium.4.vipSeats}"/>
+            <constructor-arg name="name" value="${center.auditorium.4.name}"/>
+            <constructor-arg name="numberOfSeats" value="${center.auditorium.4.numberOfSeats}"/>
+            <constructor-arg name="vipSeats" value="${center.auditorium.4.vipSeats}"/>
         </bean>
         <bean class="entities.Auditorium">
-            <property name="name" value="${center.auditorium.5.name}"/>
-            <property name="numberOfSeats" value="${center.auditorium.5.numberOfSeats}"/>
-            <property name="vipSeats" value="${center.auditorium.5.vipSeats}"/>
+            <constructor-arg name="name" value="${center.auditorium.5.name}"/>
+            <constructor-arg name="numberOfSeats" value="${center.auditorium.5.numberOfSeats}"/>
+            <constructor-arg name="vipSeats" value="${center.auditorium.5.vipSeats}"/>
         </bean>
         <bean class="entities.Auditorium">
-            <property name="name" value="${east.auditorium.1.name}"/>
-            <property name="numberOfSeats" value="${east.auditorium.1.numberOfSeats}"/>
-            <property name="vipSeats" value="${east.auditorium.1.vipSeats}"/>
+            <constructor-arg name="name" value="${east.auditorium.1.name}"/>
+            <constructor-arg name="numberOfSeats" value="${east.auditorium.1.numberOfSeats}"/>
+            <constructor-arg name="vipSeats" value="${east.auditorium.1.vipSeats}"/>
         </bean>
         <bean class="entities.Auditorium">
-            <property name="name" value="${east.auditorium.2.name}"/>
-            <property name="numberOfSeats" value="${east.auditorium.2.numberOfSeats}"/>
-            <property name="vipSeats" value="${east.auditorium.2.vipSeats}"/>
+            <constructor-arg name="name" value="${east.auditorium.2.name}"/>
+            <constructor-arg name="numberOfSeats" value="${east.auditorium.2.numberOfSeats}"/>
+            <constructor-arg name="vipSeats" value="${east.auditorium.2.vipSeats}"/>
         </bean>
     </util:list>
 

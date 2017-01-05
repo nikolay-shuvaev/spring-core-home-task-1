@@ -6,4 +6,8 @@
     <bean id="userDao" class="dao.impl.UserDaoImpl"/>
 
     <bean id="eventDao" class="dao.impl.EventDaoImpl"/>
+
+    <bean id="scheduleTableDao" class="dao.impl.ScheduleTableDaoImpl"/>
+
+    <bean id="occupiedSeatsDao" class="dao.impl.OccupiedSeatsDaoImpl"/>
 </beans>

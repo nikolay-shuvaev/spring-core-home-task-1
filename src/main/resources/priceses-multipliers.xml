@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:utils="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <utils:map id="multiplierByRating">
+        <entry key="HIGH" value="1.5"/>
+        <entry key="MID" value="1"/>
+        <entry key="LOW" value="0.5"/>
+    </utils:map>
+
+    <utils:map id="multiplierBySeatType">
+        <entry key="VIP" value="2"/>
+        <entry key="STANDARD" value="1"/>
+    </utils:map>
+</beans>
