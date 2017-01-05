@@ -1,8 +1,6 @@
 package entities;
 
-import sun.security.x509.X509CertInfo;
-
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * Created by macbook on 02.01.17.
@@ -10,10 +8,10 @@ import java.time.LocalDate;
 public class Ticket {
     private User user;
     private Event event;
-    private LocalDate dateTime;
+    private LocalDateTime dateTime;
     private Seat seat;
 
-    public Ticket(User user, Event event, LocalDate dateTime, Seat seat) {
+    private Ticket(User user, Event event, LocalDateTime dateTime, Seat seat) {
         this.user = user;
         this.event = event;
         this.dateTime = dateTime;
@@ -28,11 +26,24 @@ public class Ticket {
         return event;
     }
 
-    public LocalDate getDateTime() {
+    public LocalDateTime getDateTime() {
         return dateTime;
     }
 
     public Seat getSeat() {
         return seat;
+    }
+
+    public static Ticket of(Event event, LocalDateTime dateTime, Seat seat) {
+        return new Ticket(null, event, dateTime, seat);
+    }
+
+    public Ticket add(User user) {
+        this.setUser(user);
+        return this;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

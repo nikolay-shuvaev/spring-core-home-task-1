@@ -10,4 +10,6 @@
     <bean id="scheduleTableDao" class="dao.impl.ScheduleTableDaoImpl"/>
 
     <bean id="occupiedSeatsDao" class="dao.impl.OccupiedSeatsDaoImpl"/>
+
+    <bean id="purchasedTicketDao" class="dao.impl.PurchasedTicketDaoImpl"/>
 </beans>

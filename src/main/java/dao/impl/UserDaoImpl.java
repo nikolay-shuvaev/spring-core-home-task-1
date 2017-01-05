@@ -1,6 +1,7 @@
 package dao.impl;
 
 import dao.UserDao;
+import entities.Ticket;
 import entities.User;
 
 import java.time.LocalDate;
@@ -45,5 +46,11 @@ public class UserDaoImpl implements UserDao {
     @Override
     public List<User> getAll() {
         return new ArrayList<>(users.values());
+    }
+
+    @Override
+    public void addPurchasedTicket(User user, Ticket ticket) {
+        User storedUser = users.get(user.getId());
+        storedUser.getTickets().add(ticket);
     }
 }

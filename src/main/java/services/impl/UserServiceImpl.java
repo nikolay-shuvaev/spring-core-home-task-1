@@ -1,6 +1,7 @@
 package services.impl;
 
 import dao.UserDao;
+import entities.Ticket;
 import entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import services.UserService;
@@ -42,5 +43,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> getAll() {
         return userDao.getAll();
+    }
+
+    @Override
+    public void addPurchasedTicket(User user, Ticket ticket) {
+        userDao.addPurchasedTicket(user, ticket);
     }
 }

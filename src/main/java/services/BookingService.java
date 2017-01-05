@@ -5,7 +5,6 @@ import entities.Seat;
 import entities.Ticket;
 import entities.User;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
@@ -18,5 +17,5 @@ public interface BookingService {
 
     boolean bookTicket(List<Ticket> tickets);
 
-    List<Ticket> getPurchasedTicketsForEvent(Event event, LocalDate dateTime);
+    List<Ticket> getPurchasedTicketsForEvent(Event event, LocalDateTime dateTime);
 }

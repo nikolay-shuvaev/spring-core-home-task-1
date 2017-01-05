@@ -15,6 +15,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 
 import static entities.SeatType.*;
 
@@ -24,8 +25,8 @@ import static entities.SeatType.*;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:services-beans.xml")
 public class BookingServiceTest extends TestCase {
-    public static final String TEST_AUDITORIUM = "Center Name 4";
-    public static final LocalDateTime EVENT_DATE_TIME = LocalDateTime.of(2017, 2, 2, 13, 0);
+    private static final String TEST_AUDITORIUM = "Center Name 4";
+    private static final LocalDateTime EVENT_DATE_TIME = LocalDateTime.of(2017, 2, 2, 13, 0);
     @Autowired
     private BookingService bookingService;
     @Autowired
@@ -72,8 +73,39 @@ public class BookingServiceTest extends TestCase {
     @Test
     public void testGetTicketsPriceForVipSeats() {
         double totalPrice = bookingService.getTotalPrice(testEvent, EVENT_DATE_TIME, null,
-                new HashSet<>(Arrays.asList(Seat.of(11, VIP), Seat.of(12, VIP), Seat.of(13, VIP))));
+                new HashSet<>(Arrays.asList(Seat.of(400, VIP), Seat.of(401, VIP), Seat.of(402, VIP))));
         assertEquals(120.0, totalPrice);
+    }
+
+    @Test
+    public void testTicketBooking() {
+        List<Ticket> tickets = Arrays.asList(
+                Ticket.of(testEvent, EVENT_DATE_TIME, Seat.of(13, STANDARD)),
+                Ticket.of(testEvent, EVENT_DATE_TIME, Seat.of(14, STANDARD)),
+                Ticket.of(testEvent, EVENT_DATE_TIME, Seat.of(15, STANDARD))
+        );
+
+        boolean success = bookingService.bookTicket(tickets);
+        assertEquals(true, success);
+        List<Ticket> purchasedTickets = bookingService.getPurchasedTicketsForEvent(testEvent, EVENT_DATE_TIME);
+        assertEquals(tickets.size(), purchasedTickets.size());
+    }
+
+    @Test
+    public void testUserHasPurchasedTickets() {
+        long userId = userService.save("Test User", LocalDate.from(EVENT_DATE_TIME.plusDays(3)), "test@test.com");
+        User user = userService.getById(userId);
+
+        List<Ticket> tickets = Arrays.asList(
+                Ticket.of(testEvent, EVENT_DATE_TIME, Seat.of(13, STANDARD)).add(user),
+                Ticket.of(testEvent, EVENT_DATE_TIME, Seat.of(14, STANDARD)).add(user),
+                Ticket.of(testEvent, EVENT_DATE_TIME, Seat.of(15, STANDARD)).add(user)
+        );
+
+        boolean success = bookingService.bookTicket(tickets);
+        assertEquals(true, success);
+        User userWithTickets = userService.getById(userId);
+        assertEquals(3, userWithTickets.getTickets().size());
     }
 
 }

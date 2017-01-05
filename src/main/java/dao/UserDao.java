@@ -1,5 +1,6 @@
 package dao;
 
+import entities.Ticket;
 import entities.User;
 
 import java.time.LocalDate;
@@ -18,4 +19,6 @@ public interface UserDao {
     User getUserByEmail(String email);
 
     List<User> getAll();
+
+    void addPurchasedTicket(User user, Ticket ticket);
 }

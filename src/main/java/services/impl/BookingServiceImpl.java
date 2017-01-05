@@ -1,12 +1,13 @@
 package services.impl;
 
+import dao.PurchasedTicketDao;
 import entities.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import services.AuditoriumService;
 import services.BookingService;
 import services.DiscountService;
+import services.UserService;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -16,18 +17,23 @@ import java.util.*;
 public class BookingServiceImpl implements BookingService {
     private final DiscountService discountService;
     private final AuditoriumService auditoriumService;
-    
+    private final UserService userService;
+    private final PurchasedTicketDao purchasedTicketDao;
+
     private Map<Rating, Double>  multiplierByRating;
     private Map<SeatType, Double> multiplierBySeatType;
-    private Map<Long, List<Ticket>> purchasedTicket;
 
     @Autowired
     public BookingServiceImpl(DiscountService discountService,
                               AuditoriumService auditoriumService,
+                              UserService userService,
+                              PurchasedTicketDao purchasedTicketDao,
                               Map<Rating, Double> multiplierByRating,
                               Map<SeatType, Double> multiplierBySeatType) {
         this.discountService = discountService;
         this.auditoriumService = auditoriumService;
+        this.userService = userService;
+        this.purchasedTicketDao = purchasedTicketDao;
         this.multiplierByRating = multiplierByRating;
         this.multiplierBySeatType = multiplierBySeatType;
     }
@@ -48,27 +54,20 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public boolean bookTicket(List<Ticket> tickets) {
+        validateTickets(tickets);
+
         for (Ticket ticket : tickets) {
-            long id = ticket.getEvent().getId();
-            if (!purchasedTicket.containsKey(id)) {
-                purchasedTicket.put(id, new ArrayList<>(Collections.singletonList(ticket)));
-            } else {
-                purchasedTicket.get(id).add(ticket);
+            purchasedTicketDao.saveTicket(ticket);
+            if (ticket.getUser() != null) {
+                userService.addPurchasedTicket(ticket.getUser(),ticket);
             }
         }
-        return false;
+        return true;
     }
 
     @Override
-    public List<Ticket> getPurchasedTicketsForEvent(Event event, LocalDate dateTime) {
-        List<Ticket> tickets = purchasedTicket.get(event.getId());
-        List<Ticket> result = new ArrayList<>();
-        for (Ticket ticket : tickets) {
-            if (ticket.getDateTime().equals(dateTime)) {
-                result.add(ticket);
-            }
-        }
-        return result;
+    public List<Ticket> getPurchasedTicketsForEvent(Event event, LocalDateTime dateTime) {
+        return purchasedTicketDao.getBy(event, dateTime);
     }
 
     private double calculatePriceBasedOnSeatType(Set<Seat> seats, double basePrice) {
@@ -97,19 +96,47 @@ public class BookingServiceImpl implements BookingService {
         }
 
         if (!isAllSeatsAvailableToBook(event, dateTime, seats)) {
-            throw new IllegalArgumentException("Some of your seats already occupied");
+            throw new IllegalArgumentException("Specified seats could not be booked");
         }
     }
 
     private boolean isAllSeatsAvailableToBook(Event event, LocalDateTime dateTime, Set<Seat> seats) {
         Auditorium auditorium = auditoriumService.getAuditoriumByEventAndDate(event, dateTime);
+        boolean isSomeSeatsOccupied = isSomeSeatsOccupied(seats, auditorium);
+        boolean isSeatsSuiteToAuditorium = isSeatsSuiteToAuditorium(seats, auditorium);
+        return !isSomeSeatsOccupied && isSeatsSuiteToAuditorium;
+    }
+
+    private boolean isSeatsSuiteToAuditorium(Set<Seat> seats, Auditorium auditorium) {
+        Integer numberOfSeats = auditorium.getNumberOfSeats();
+        Set<Integer> vipSeats = auditorium.getVipSeats();
+        for (Seat seat : seats) {
+            int seatNumber = seat.getSeatNumber();
+            if (seatNumber > numberOfSeats || (seat.getType() == SeatType.VIP && !vipSeats.contains(seatNumber))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean isSomeSeatsOccupied(Set<Seat> seats, Auditorium auditorium) {
         Set<Seat> occupiedSeats = auditoriumService.getOccupiedSeats(auditorium);
-        return occupiedSeats == null || occupiedSeats.removeAll(seats);
+        return occupiedSeats != null && !occupiedSeats.removeAll(seats);
     }
 
     private boolean isAuditoriumExistForEvent(Event event, LocalDateTime dateTime) {
         Auditorium auditorium = auditoriumService.getAuditoriumByEventAndDate(event, dateTime);
         return auditorium != null;
+    }
+
+    private void validateTickets(List<Ticket> tickets) {
+        if (tickets == null) {
+            throw new IllegalArgumentException("No tickets passed");
+        }
+
+        for (Ticket ticket : tickets) {
+            validateParameters(ticket.getEvent(), ticket.getDateTime(), new HashSet<>(Collections.singletonList(ticket.getSeat())));
+        }
     }
 
 }

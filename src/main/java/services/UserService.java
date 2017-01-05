@@ -1,5 +1,6 @@
 package services;
 
+import entities.Ticket;
 import entities.User;
 
 import java.time.LocalDate;
@@ -19,4 +20,6 @@ public interface UserService {
     User getUserByEmail(String email);
 
     List<User> getAll();
+
+    void addPurchasedTicket(User user, Ticket ticket);
 }

@@ -1,6 +1,8 @@
 package entities;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by macbook on 02.01.17.
@@ -10,6 +12,7 @@ public class User {
     private final String name;
     private final LocalDate birthday;
     private final String email;
+    private List<Ticket> tickets = new ArrayList<>();
 
     public User(Long id, String name, LocalDate birthday, String email) {
         this.id = id;
@@ -32,5 +35,9 @@ public class User {
 
     public String getEmail() {
         return email;
+    }
+
+    public List<Ticket> getTickets() {
+        return tickets;
     }
 }

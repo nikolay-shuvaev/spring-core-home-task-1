@@ -7,10 +7,10 @@ import java.util.Set;
  */
 public class Auditorium {
     private final String name;
-    private final String numberOfSeats;
-    private final Set<String> vipSeats;
+    private final Integer numberOfSeats;
+    private final Set<Integer> vipSeats;
 
-    public Auditorium(String name, String numberOfSeats, Set<String> vipSeats) {
+    public Auditorium(String name, Integer numberOfSeats, Set<Integer> vipSeats) {
         this.name = name;
         this.numberOfSeats = numberOfSeats;
         this.vipSeats = vipSeats;
@@ -20,11 +20,11 @@ public class Auditorium {
         return name;
     }
 
-    public String getNumberOfSeats() {
+    public Integer getNumberOfSeats() {
         return numberOfSeats;
     }
 
-    public Set<String> getVipSeats() {
+    public Set<Integer> getVipSeats() {
         return vipSeats;
     }
 
