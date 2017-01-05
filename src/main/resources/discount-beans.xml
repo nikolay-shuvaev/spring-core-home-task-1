@@ -15,7 +15,7 @@
 
 
     <bean id="birthdayStrategy" class="services.strategies.BirthdayDiscountStrategy">
-        <constructor-arg value="5"/>
+        <constructor-arg value="10"/>
         <constructor-arg value="5"/>
     </bean>
 

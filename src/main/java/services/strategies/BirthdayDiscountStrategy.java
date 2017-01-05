@@ -18,11 +18,10 @@ public class BirthdayDiscountStrategy extends DiscountStrategyBase {
 
     public boolean isApplyDiscount(User user, Event event, LocalDate dateTime, int numberOfTickets) {
         if (user != null) {
-            LocalDate now = LocalDate.now();
-            LocalDate till = now.plusDays(discountDays);
-            LocalDate currentDateOfBirth  = user.getBirthday().withYear(now.getYear());
+            LocalDate till = dateTime.plusDays(discountDays);
+            LocalDate currentDateOfBirth  = user.getBirthday().withYear(dateTime.getYear());
 
-            return (now.equals(currentDateOfBirth) || now.isBefore(currentDateOfBirth))
+            return (dateTime.equals(currentDateOfBirth) || dateTime.isBefore(currentDateOfBirth))
                     && (till.equals(currentDateOfBirth) || till.isAfter(currentDateOfBirth));
         }
         return false;

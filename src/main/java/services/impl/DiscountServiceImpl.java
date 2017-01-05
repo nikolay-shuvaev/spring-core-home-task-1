@@ -18,7 +18,7 @@ public class DiscountServiceImpl implements DiscountService {
         int result = 0;
         for (DiscountStrategy strategy : strategies) {
             int discount = strategy.getDiscount(user, event, dateTime, numberOfTickets);
-            if (result > discount) {
+            if (discount > result) {
                 result = discount;
             }
         }

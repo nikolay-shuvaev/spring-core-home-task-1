@@ -23,7 +23,7 @@ public class SoldTicketDiscountStrategy extends DiscountStrategyBase {
     @Override
     public int calculateDiscount(User user, Event event, LocalDate dateTime, int numberOfTickets) {
         int numberOfTicketsWithDiscount = numberOfTickets / discountTicketNumber;
-        return (100 - getDiscountValue()) * numberOfTicketsWithDiscount / numberOfTickets;
+        return (100 - (100 - getDiscountValue())) * numberOfTicketsWithDiscount / numberOfTickets;
     }
 
 }
