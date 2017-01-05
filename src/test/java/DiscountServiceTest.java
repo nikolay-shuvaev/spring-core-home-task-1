@@ -13,6 +13,7 @@ import services.EventService;
 import services.UserService;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * Created by NICK on 05.01.2017.
@@ -41,25 +42,25 @@ public class DiscountServiceTest extends TestCase {
 
     @Test
     public void testNoDiscountReturn() {
-        int discount = discountService.getDiscount(testUser, testEvent, LocalDate.of(2017, 1, 1), 2);
+        int discount = discountService.getDiscount(testUser, testEvent, LocalDateTime.of(2017, 1, 1, 0, 0), 2);
         assertEquals(0, discount);
     }
 
     @Test
     public void testGetBirthdayDiscount() {
-        int discount = discountService.getDiscount(testUser, testEvent, LocalDate.of(2017, 11, 12), 2);
+        int discount = discountService.getDiscount(testUser, testEvent, LocalDateTime.of(2017, 11, 12, 0, 0), 2);
         assertEquals(10, discount);
     }
 
     @Test
     public void testGetSoldTiketDiscount() {
-        int discount = discountService.getDiscount(testUser, testEvent, LocalDate.of(2017, 1, 1), 10);
+        int discount = discountService.getDiscount(testUser, testEvent, LocalDateTime.of(2017, 1, 1, 0,0), 10);
         assertEquals(5, discount);
     }
 
     @Test
     public void testGetMoreDiscount() {
-        int discount = discountService.getDiscount(testUser, testEvent, LocalDate.of(2017, 11, 12), 10);
+        int discount = discountService.getDiscount(testUser, testEvent, LocalDateTime.of(2017, 11, 12, 0,0), 10);
         assertEquals(10, discount);
     }
 

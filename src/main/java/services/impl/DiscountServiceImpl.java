@@ -5,7 +5,7 @@ import entities.User;
 import services.DiscountService;
 import services.strategies.DiscountStrategy;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -14,7 +14,7 @@ import java.util.List;
 public class DiscountServiceImpl implements DiscountService {
     private List<DiscountStrategy> strategies;
 
-    public int getDiscount(User user, Event event, LocalDate dateTime, int numberOfTickets) {
+    public int getDiscount(User user, Event event, LocalDateTime dateTime, int numberOfTickets) {
         int result = 0;
         for (DiscountStrategy strategy : strategies) {
             int discount = strategy.getDiscount(user, event, dateTime, numberOfTickets);

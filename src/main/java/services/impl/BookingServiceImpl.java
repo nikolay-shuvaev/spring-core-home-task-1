@@ -6,6 +6,7 @@ import services.BookingService;
 import services.DiscountService;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 /**
@@ -19,7 +20,7 @@ public class BookingServiceImpl implements BookingService {
     private Map<Long, List<Ticket>> purchasedTicket;
 
     @Override
-    public double getTotalPrice(Event event, LocalDate dateTime, User user, List<Seat> seats) {
+    public double getTotalPrice(Event event, LocalDateTime dateTime, User user, List<Seat> seats) {
         int discount = discountService.getDiscount(user, event, dateTime, seats.size());
         double basePrice = event.getBasePrice();
         Rating rating = event.getRating();

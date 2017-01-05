@@ -6,14 +6,14 @@ import entities.Ticket;
 import entities.User;
 
 import java.time.LocalDate;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
  * Created by macbook on 02.01.17.
  */
 public interface BookingService {
-    double getTotalPrice(Event event, LocalDate dateTime, User user, List<Seat> seats);
+    double getTotalPrice(Event event, LocalDateTime dateTime, User user, List<Seat> seats);
 
     boolean bookTicket(List<Ticket> tickets);
 
