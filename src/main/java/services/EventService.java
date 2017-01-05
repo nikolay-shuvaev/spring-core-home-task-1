@@ -13,7 +13,7 @@ public interface EventService {
 
     void remove(long id);
 
-    Event getById(int id);
+    Event getById(long id);
 
     Event getEventByName(String name);
 

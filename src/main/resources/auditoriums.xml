@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+
+    <util:list id="auditoriumsList">
+        <bean class="entities.Auditorium">
+            <property name="name" value="${center.auditorium.1.name}"/>
+            <property name="numberOfSeats" value="${center.auditorium.1.numberOfSeats}"/>
+            <property name="vipSeats" value="${center.auditorium.1.vipSeats}"/>
+        </bean>
+        <bean class="entities.Auditorium">
+            <property name="name" value="${center.auditorium.2.name}"/>
+            <property name="numberOfSeats" value="${center.auditorium.2.numberOfSeats}"/>
+            <property name="vipSeats" value="${center.auditorium.2.vipSeats}"/>
+        </bean>
+        <bean class="entities.Auditorium">
+            <property name="name" value="${center.auditorium.3.name}"/>
+            <property name="numberOfSeats" value="${center.auditorium.3.numberOfSeats}"/>
+            <property name="vipSeats" value="${center.auditorium.3.vipSeats}"/>
+        </bean>
+        <bean class="entities.Auditorium">
+            <property name="name" value="${center.auditorium.4.name}"/>
+            <property name="numberOfSeats" value="${center.auditorium.4.numberOfSeats}"/>
+            <property name="vipSeats" value="${center.auditorium.4.vipSeats}"/>
+        </bean>
+        <bean class="entities.Auditorium">
+            <property name="name" value="${center.auditorium.5.name}"/>
+            <property name="numberOfSeats" value="${center.auditorium.5.numberOfSeats}"/>
+            <property name="vipSeats" value="${center.auditorium.5.vipSeats}"/>
+        </bean>
+        <bean class="entities.Auditorium">
+            <property name="name" value="${east.auditorium.1.name}"/>
+            <property name="numberOfSeats" value="${east.auditorium.1.numberOfSeats}"/>
+            <property name="vipSeats" value="${east.auditorium.1.vipSeats}"/>
+        </bean>
+        <bean class="entities.Auditorium">
+            <property name="name" value="${east.auditorium.2.name}"/>
+            <property name="numberOfSeats" value="${east.auditorium.2.numberOfSeats}"/>
+            <property name="vipSeats" value="${east.auditorium.2.vipSeats}"/>
+        </bean>
+    </util:list>
+
+    <bean id="placeholderConfigurer" class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>auditoriums/auditoriums-center.properties</value>
+                <value>auditoriums/auditoriums-east.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean" />
+
+</beans>

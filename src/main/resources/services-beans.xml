@@ -4,14 +4,17 @@
         http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
 
-    <bean id="bookingService" class="services.impl.BookingServiceImpl"/>
+   <bean id="bookingService" class="services.impl.BookingServiceImpl"/>
 
     <bean id="userService" class="services.impl.UserServiceImpl"/>
 
     <bean id="eventService" class="services.impl.EventServiceImpl"/>
 
-    <bean id="auditoriumService" class="services.impl.AuditoriumServiceImpl"/>
+    <bean id="auditoriumService" class="services.impl.AuditoriumServiceImpl">
+        <constructor-arg ref="auditoriumsList"/>
+    </bean>
 
     <import resource="discount-beans.xml"/>
     <import resource="dao-beans.xml"/>
+    <import resource="auditoriums.xml"/>
 </beans>

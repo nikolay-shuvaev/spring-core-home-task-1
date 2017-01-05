@@ -5,7 +5,6 @@ import entities.Event;
 import entities.Rating;
 import org.springframework.beans.factory.annotation.Autowired;
 import services.EventService;
-import services.UserService;
 
 import java.util.List;
 
@@ -31,7 +30,7 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public Event getById(int id) {
+    public Event getById(long id) {
         return eventDao.getById(id);
     }
 
